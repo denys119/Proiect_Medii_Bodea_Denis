@@ -1,0 +1,93 @@
+﻿@page
+@model Proiect_Medii_Bodea_Denis.Pages.Masini.IndexModel
+
+@{
+    ViewData["Title"] = "Masini";
+}
+
+<h1>Masini inregistrate</h1>
+
+<p>
+    <a asp-page="Create">Adauga o noua masina</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Masina[0].Marca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Masina[0].Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Masina[0].Culoare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Masina[0].An)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Masina[0].Pret)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Masina[0].DataAdaugare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Masina[0].Angajat.NumeAngajat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Masina[0].Tara.TaraProvenienta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Masina[0].MasinaCategories)
+        </th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MasinaD.Masina) {
+    string selectedRow = " ";
+    if(item.ID == Model.MasinaID){
+        selectedRow = "table-succes";
+    }
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Culoare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.An)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pret)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAdaugare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Angajat.NumeAngajat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tara.TaraProvenienta)
+            </td>
+            <td>
+                @{
+                    foreach (var category in item.MasinaCategories)
+                    {
+                        @category.Category.ID @: @category.Category.CategoryName<br/>
+                    }
+                 }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
